@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nkqgfx3t5ear"
-path="res://.godot/imported/Saurial_idle_diag.png-3c0ea69f6697cee656d30fb1fbac41a7.ctex"
+uid="uid://c1sjussagg4di"
+path="res://.godot/imported/walking.png-04d2b429e09004d454f748e215787efe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_idle_diag.png"
-dest_files=["res://.godot/imported/Saurial_idle_diag.png-3c0ea69f6697cee656d30fb1fbac41a7.ctex"]
+source_file="res://Resources/Sprites/Player/walking.png"
+dest_files=["res://.godot/imported/walking.png-04d2b429e09004d454f748e215787efe.ctex"]
 
 [params]
 

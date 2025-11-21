@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk0vsepv7huq6"
-path="res://.godot/imported/Saurial_ko.png-70c0b6c36beeb7cdfeaf9c7a3978ee44.ctex"
+uid="uid://bjtg42ud23gse"
+path="res://.godot/imported/collapse.png-68802daaa4244afb78749ed580651e89.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_ko.png"
-dest_files=["res://.godot/imported/Saurial_ko.png-70c0b6c36beeb7cdfeaf9c7a3978ee44.ctex"]
+source_file="res://Resources/Sprites/Player/collapse.png"
+dest_files=["res://.godot/imported/collapse.png-68802daaa4244afb78749ed580651e89.ctex"]
 
 [params]
 

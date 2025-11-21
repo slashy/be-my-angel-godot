@@ -1,14 +1,14 @@
 [gd_scene load_steps=115 format=4 uid="uid://d3mmwgxcwh2a6"]
 
 [ext_resource type="Script" uid="uid://ci18mceh0r5ca" path="res://Scripts/Player.gd" id="1_xhfnw"]
-[ext_resource type="Texture2D" uid="uid://drm5c83800xw7" path="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_ko.png" id="2_52ee3"]
-[ext_resource type="Texture2D" uid="uid://dtox0r5q63ni5" path="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_idle1.png" id="2_gntrk"]
-[ext_resource type="Texture2D" uid="uid://cssw8hp0alls" path="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_idle1_diag.png" id="3_5ixxa"]
-[ext_resource type="Texture2D" uid="uid://c1sjussagg4di" path="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_walking.png" id="3_dewec"]
-[ext_resource type="Texture2D" uid="uid://bjtg42ud23gse" path="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_collapse.png" id="4_nn08x"]
-[ext_resource type="Texture2D" uid="uid://8oyr76ibojia" path="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_walking_diag.png" id="5_nn08x"]
-[ext_resource type="AudioStream" uid="uid://bla0ko25ksiut" path="res://Resources/GS1_Hit_1.ogg" id="8_bhhdu"]
-[ext_resource type="AudioStream" uid="uid://cxjdqeu3nwax5" path="res://Resources/WAV_UI_Male1_Mage_Hit_Large_05.wav" id="9_megsn"]
+[ext_resource type="Texture2D" uid="uid://drm5c83800xw7" path="res://Resources/Sprites/Player/ko.png" id="2_52ee3"]
+[ext_resource type="Texture2D" uid="uid://dtox0r5q63ni5" path="res://Resources/Sprites/Player/idle1.png" id="2_gntrk"]
+[ext_resource type="Texture2D" uid="uid://cssw8hp0alls" path="res://Resources/Sprites/Player/idle1_diag.png" id="3_5ixxa"]
+[ext_resource type="Texture2D" uid="uid://c1sjussagg4di" path="res://Resources/Sprites/Player/walking.png" id="3_dewec"]
+[ext_resource type="Texture2D" uid="uid://bjtg42ud23gse" path="res://Resources/Sprites/Player/collapse.png" id="4_nn08x"]
+[ext_resource type="Texture2D" uid="uid://8oyr76ibojia" path="res://Resources/Sprites/Player/walking_diag.png" id="5_nn08x"]
+[ext_resource type="AudioStream" uid="uid://bla0ko25ksiut" path="res://Resources/SFX/GS1_Hit_1.ogg" id="8_bhhdu"]
+[ext_resource type="AudioStream" uid="uid://cxjdqeu3nwax5" path="res://Resources/SFX/WAV_UI_Male1_Mage_Hit_Large_05.wav" id="9_megsn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b4mdf"]
 atlas = ExtResource("2_52ee3")

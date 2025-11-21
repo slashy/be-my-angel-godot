@@ -1,11 +1,11 @@
 [gd_scene load_steps=106 format=3 uid="uid://b6ooqdy6j21n8"]
 
-[ext_resource type="Texture2D" uid="uid://d3d7pnid2oxpg" path="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_idle.png" id="1_o7wem"]
+[ext_resource type="Texture2D" uid="uid://d3d7pnid2oxpg" path="res://Resources/Sprites/Enemy/idle.png" id="1_o7wem"]
 [ext_resource type="Script" uid="uid://cw8ydxyp5av" path="res://Scripts/Enemy.gd" id="1_y5fbj"]
-[ext_resource type="Texture2D" uid="uid://1yimjggoisum" path="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_flying.png" id="1_y26aa"]
-[ext_resource type="Texture2D" uid="uid://575lr7mxqegb" path="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_flying_diag.png" id="2_y5fbj"]
-[ext_resource type="Texture2D" uid="uid://nkqgfx3t5ear" path="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_idle_diag.png" id="4_p7668"]
-[ext_resource type="AudioStream" uid="uid://c5q1oh28y27ey" path="res://Resources/EVFX02_06_RazorClaw.ogg" id="6_mo1ky"]
+[ext_resource type="Texture2D" uid="uid://1yimjggoisum" path="res://Resources/Sprites/Enemy/flying.png" id="1_y26aa"]
+[ext_resource type="Texture2D" uid="uid://575lr7mxqegb" path="res://Resources/Sprites/Enemy/flying_diag.png" id="2_y5fbj"]
+[ext_resource type="Texture2D" uid="uid://nkqgfx3t5ear" path="res://Resources/Sprites/Enemy/idle_diag.png" id="4_p7668"]
+[ext_resource type="AudioStream" uid="uid://c5q1oh28y27ey" path="res://Resources/SFX/EVFX02_06_RazorClaw.ogg" id="6_mo1ky"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bxir8"]
 atlas = ExtResource("1_y26aa")

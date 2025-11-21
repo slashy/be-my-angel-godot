@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3d7pnid2oxpg"
-path="res://.godot/imported/Saurial_idle.png-b4c8dc490e01d3ce62689a9211583264.ctex"
+uid="uid://bk0vsepv7huq6"
+path="res://.godot/imported/ko.png-fa4f188c8a2ff39f7df644783532fdcb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_idle.png"
-dest_files=["res://.godot/imported/Saurial_idle.png-b4c8dc490e01d3ce62689a9211583264.ctex"]
+source_file="res://Resources/Sprites/Enemy/ko.png"
+dest_files=["res://.godot/imported/ko.png-fa4f188c8a2ff39f7df644783532fdcb.ctex"]
 
 [params]
 

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://pbrd5054mnu7" path="res://Scripts/GameManager.gd" id="1_pyk7t"]
 [ext_resource type="PackedScene" uid="uid://b6ooqdy6j21n8" path="res://Scenes/Enemy.tscn" id="4_x00a1"]
 [ext_resource type="PackedScene" uid="uid://qfhcdvwxrfbo" path="res://Scenes/Gameover.tscn" id="6_dpcf1"]
-[ext_resource type="AudioStream" uid="uid://dpi1rupevp7ax" path="res://Resources/JDB_Red Control.ogg" id="7_jhdhk"]
+[ext_resource type="AudioStream" uid="uid://dpi1rupevp7ax" path="res://Resources/SFX/JDB_Red Control.ogg" id="7_jhdhk"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_4f205")
@@ -38,10 +38,12 @@ offset_bottom = 49.0
 
 [node name="TimeLabel" type="Label" parent="HUD/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Time"
 
 [node name="BestLabel" type="Label" parent="HUD/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Best"
 
 [node name="Startscreen" type="RichTextLabel" parent="HUD"]

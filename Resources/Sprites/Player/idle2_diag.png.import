@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://575lr7mxqegb"
-path="res://.godot/imported/Saurial_flying_diag.png-f2b53b0a742e3eaae41ae54e9775ce11.ctex"
+uid="uid://cv2fj1lvua6uu"
+path="res://.godot/imported/idle2_diag.png-107c5c296731435f27c9df17e4a1a6b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Medieval Heroes I - PV Games/Saurial/Saurial_flying_diag.png"
-dest_files=["res://.godot/imported/Saurial_flying_diag.png-f2b53b0a742e3eaae41ae54e9775ce11.ctex"]
+source_file="res://Resources/Sprites/Player/idle2_diag.png"
+dest_files=["res://.godot/imported/idle2_diag.png-107c5c296731435f27c9df17e4a1a6b2.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1sjussagg4di"
-path="res://.godot/imported/MasterGaerron_walking.png-e929875e2c05384047811839ede58549.ctex"
+uid="uid://575lr7mxqegb"
+path="res://.godot/imported/flying_diag.png-ac12fe9cc2cff491523a4c1edd953f68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_walking.png"
-dest_files=["res://.godot/imported/MasterGaerron_walking.png-e929875e2c05384047811839ede58549.ctex"]
+source_file="res://Resources/Sprites/Enemy/flying_diag.png"
+dest_files=["res://.godot/imported/flying_diag.png-ac12fe9cc2cff491523a4c1edd953f68.ctex"]
 
 [params]
 

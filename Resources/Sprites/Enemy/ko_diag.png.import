@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjtg42ud23gse"
-path="res://.godot/imported/MasterGaerron_collapse.png-0ddea73d128ea6570a137604fb908104.ctex"
+uid="uid://cc3xpnwg8wwku"
+path="res://.godot/imported/ko_diag.png-a79fdced8ed14536227f44d003921bc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Medieval Heroes I - PV Games/MasterGaerron/MasterGaerron_collapse.png"
-dest_files=["res://.godot/imported/MasterGaerron_collapse.png-0ddea73d128ea6570a137604fb908104.ctex"]
+source_file="res://Resources/Sprites/Enemy/ko_diag.png"
+dest_files=["res://.godot/imported/ko_diag.png-a79fdced8ed14536227f44d003921bc1.ctex"]
 
 [params]
 

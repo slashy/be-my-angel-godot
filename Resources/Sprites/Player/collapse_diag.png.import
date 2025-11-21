@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dap1ce167eomc"
-path="res://.godot/imported/M08s-P1a-Arena.png-5ee9bd82c610d6cd4667b2a0780a8919.ctex"
+uid="uid://cifpahlnem2vk"
+path="res://.godot/imported/collapse_diag.png-f6f8e39e6b5a6d05526bb412da347db4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/M08s-P1a-Arena.png"
-dest_files=["res://.godot/imported/M08s-P1a-Arena.png-5ee9bd82c610d6cd4667b2a0780a8919.ctex"]
+source_file="res://Resources/Sprites/Player/collapse_diag.png"
+dest_files=["res://.godot/imported/collapse_diag.png-f6f8e39e6b5a6d05526bb412da347db4.ctex"]
 
 [params]
 
