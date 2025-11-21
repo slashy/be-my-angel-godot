@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b721liwlxfame"]
+
+[ext_resource type="Script" uid="uid://beb1qf4lyh5pk" path="res://Scripts/HUD.gd" id="1_0g2wx"]
+[ext_resource type="PackedScene" uid="uid://d3mmwgxcwh2a6" path="res://Scenes/Player.tscn" id="1_2gd4f"]
+[ext_resource type="Script" uid="uid://pbrd5054mnu7" path="res://Scripts/GameManager.gd" id="1_pyk7t"]
+
+[node name="Arena" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_pyk7t")
+
+[node name="BeeContainer" type="Node2D" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_0g2wx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+offset_left = 60.0
+offset_top = -186.0
+offset_right = 100.0
+offset_bottom = -136.0
+
+[node name="TimeLabel" type="Label" parent="HUD/VBoxContainer"]
+layout_mode = 2
+text = "Time"
+
+[node name="BestLabel" type="Label" parent="HUD/VBoxContainer"]
+layout_mode = 2
+text = "Best"
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_2gd4f")]
