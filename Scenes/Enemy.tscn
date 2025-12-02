@@ -765,15 +765,18 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mo1ky"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1exfc"]
-radius = 25.333334
-height = 90.66667
+radius = 37.333332
+height = 120.00001
 
 [node name="Angel" type="Node2D" groups=["enemies"]]
+z_index = 1
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_y5fbj")
 spawn_time = 0.25
 direction_indicator_length = 250.0
 attack_width = 56.0
+knockback_strength = 600.0
+knockback_timer = 0.6
 tether_pulse_speed = 5.0
 tether_glow_intensity = 3.0
 
@@ -783,20 +786,23 @@ animation = &"fly_up_left"
 frame_progress = 0.90271956
 
 [node name="AttackIndicator" type="Line2D" parent="."]
+physics_interpolation_mode = 1
 visible = false
 show_behind_parent = true
 z_index = -1
 width = 45.0
 default_color = Color(0.9607843, 0.5882353, 0, 0.8235294)
+antialiased = true
 
 [node name="DirectionIndicator" type="Line2D" parent="."]
+physics_interpolation_mode = 1
 visible = false
 show_behind_parent = true
 z_index = -1
 material = SubResource("ShaderMaterial_mo1ky")
 width = 3.0
 default_color = Color(0.19215687, 1, 0.007843138, 0.6156863)
-joint_mode = 2
+antialiased = true
 
 [node name="AttackArea" type="Area2D" parent="."]
 

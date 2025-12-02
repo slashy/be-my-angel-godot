@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b721liwlxfame"]
+[gd_scene load_steps=9 format=3 uid="uid://b721liwlxfame"]
 
 [ext_resource type="Script" uid="uid://beb1qf4lyh5pk" path="res://Scripts/HUD.gd" id="1_0g2wx"]
 [ext_resource type="PackedScene" uid="uid://d3mmwgxcwh2a6" path="res://Scenes/Player.tscn" id="1_2gd4f"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b6ooqdy6j21n8" path="res://Scenes/Enemy.tscn" id="4_x00a1"]
 [ext_resource type="PackedScene" uid="uid://qfhcdvwxrfbo" path="res://Scenes/Gameover.tscn" id="6_dpcf1"]
 [ext_resource type="AudioStream" uid="uid://dpi1rupevp7ax" path="res://Resources/SFX/JDB_Red Control.ogg" id="7_jhdhk"]
+[ext_resource type="Texture2D" uid="uid://dap1ce167eomc" path="res://Resources/Sprites/M08s-P1a-Arena.png" id="8_bugre"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_4f205")
@@ -14,14 +15,21 @@ script = ExtResource("1_4f205")
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_pyk7t")
 enemy_scene = ExtResource("4_x00a1")
+initial_spawn_interval = 1.75
+min_spawn_interval = 0.5
+spawn_acceleration = 0.01
+max_enemys_per_spawn = 4
 
 [node name="EnemyContainer" type="Node2D" parent="."]
+z_index = 1
+z_as_relative = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 1)
 anchor_mode = 0
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_2gd4f")]
+top_level = true
 texture_filter = 1
 position = Vector2(360, 360)
 motion_mode = 1
@@ -31,10 +39,12 @@ layer = 0
 script = ExtResource("1_0g2wx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
-offset_left = 553.0
-offset_top = -1.0
-offset_right = 718.0
-offset_bottom = 49.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -165.0
+offset_bottom = 50.0
+grow_horizontal = 0
 
 [node name="TimeLabel" type="Label" parent="HUD/VBoxContainer"]
 layout_mode = 2
@@ -47,9 +57,12 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Best"
 
 [node name="Startscreen" type="RichTextLabel" parent="HUD"]
-offset_top = 1.0
-offset_right = 720.0
-offset_bottom = 720.0
+physics_interpolation_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
 text = "[color=yellow]Move to start[/color]"
@@ -62,3 +75,8 @@ vertical_alignment = 1
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_jhdhk")
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(0.7097222, 0.7097222)
+texture = ExtResource("8_bugre")
+centered = false

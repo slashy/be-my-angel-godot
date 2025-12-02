@@ -1,9 +1,9 @@
 extends Control
 
-@onready var score_label: Label = $Score
-@onready var highscore_label: RichTextLabel = $Highscore
-@onready var restart_button: Button = $ButtonContainer/Restart
-@onready var quit_button: Button = $ButtonContainer/Quit
+@onready var score_label: Label = $Screen/Score
+@onready var highscore_label: RichTextLabel = $Screen/Highscore
+@onready var restart_button: Button = $Screen/ButtonContainer/Restart
+@onready var quit_button: Button = $Screen/ButtonContainer/Quit
 
 func _ready():
 	visibility_changed.connect(_on_visibility_changed)
@@ -19,7 +19,7 @@ func show_gameover():
 	visible = true
 
 func set_score(score: float):
-	score_label.text = str("%0.2f" % score)
+	score_label.text = str("Score: %0.2f" % score)
 
 func set_highscore(is_highscore: bool):
 	if is_highscore:

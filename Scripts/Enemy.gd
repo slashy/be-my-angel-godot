@@ -39,6 +39,15 @@ var tether_time: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Scale enemy to be proportional to viewport, but smaller than before
+	var viewport_size = get_viewport().get_visible_rect().size
+	var base_viewport_size = 720.0
+	var current_size = min(viewport_size.x, viewport_size.y)
+	var scale_factor = current_size / base_viewport_size
+	
+	# Apply a smaller scale factor for enemies (e.g., 0.6 times the viewport scale)
+	scale = Vector2(scale_factor * 0.6, scale_factor * 0.6)
+	
 	var target: Vector2 = Vector2.ZERO
 	var players: Array = get_tree().get_nodes_in_group("player")
 	arena_radius = get_parent().arena_radius
@@ -160,4 +169,6 @@ func get_attack_target(start: Vector2, direction: Vector2) -> Vector2:
 func _on_attack_area_body_entered(body):
 	# body ist das eingefallene Objekt – z.B. dein Spieler
 	if move_to_target and body.is_in_group("player"):
+		print("Player hit!")
 		body.apply_knockback(attack_indicator_end, knockback_strength, knockback_timer)
+		

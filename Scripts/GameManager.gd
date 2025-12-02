@@ -17,7 +17,6 @@ var spawn_interval: float
 var game_over_shown = false
 var game_started = false
 
-# aktuell belegte Spawnwinkel (Radiant)
 var taken_angles: Array = []
 
 @onready var player = get_node_or_null("../Player")
@@ -26,6 +25,7 @@ var taken_angles: Array = []
 @onready var startscreen = get_node_or_null("../HUD/Startscreen")
 @onready var gameover = get_node_or_null("../Gameover/Gameover")
 @onready var bgm: AudioStreamPlayer2D = get_node_or_null("../BGM")
+@onready var arena: Sprite2D = get_node_or_null("../Background")
 
 var arena_global_center: Vector2 = Vector2.ZERO
 
@@ -34,11 +34,20 @@ func _ready() -> void:
 	if bgm:
 		bgm.volume_db -= 10
 		bgm.play()
+	
 	spawn_interval = initial_spawn_interval
 	spawn_timer = spawn_interval
 	
+	# Set arena center to viewport center
 	if get_parent():
 		arena_global_center = get_parent().get_viewport_rect().size / 2
+	
+	# Calculate arena radius based on viewport size
+	var viewport_size = get_viewport().get_visible_rect().size
+	var base_viewport_size = 720.0  # Your original design size
+	var base_radius = 290.0  # Your original radius
+	var current_size = min(viewport_size.x, viewport_size.y)
+	arena_radius = (current_size / base_viewport_size) * base_radius
 	
 	if hud:
 		hud.call_deferred("update_highscore", load_highscore())
@@ -130,7 +139,7 @@ func _choose_spawn_angles(count: int) -> Array:
 				best_angle = cand
 		if best_angle == null:
 			if chosen.size() == 0:
-				best_angle = randf() * TAU
+				return []
 			else:
 				best_angle = wrapf(chosen[chosen.size() - 1] + min_sep_rad, 0.0, TAU)
 		chosen.append(best_angle)

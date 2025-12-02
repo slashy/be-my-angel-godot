@@ -5,6 +5,11 @@ extends CanvasLayer
 var timer_playing: bool = false
 
 func _ready() -> void:
+	# Ensure HUD doesn't scale with the game world
+	follow_viewport_enabled = false
+	# Keep UI at native resolution
+	transform = Transform2D.IDENTITY
+	
 	if time_label == null:
 		push_warning("HUD: TimeLabel not found at 'VBoxContainer/TimeLabel'. Bitte prüfen: Node existiert und heißt genau so.")
 	if best_label == null:
