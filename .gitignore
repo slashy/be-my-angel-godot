@@ -1,3 +1,31 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+*.translation
+
+# Game builds and exports
+builds/
+exports/
+*.exe
+*.x86_64
+*.pck
+
+# IntelliJ IDEA ignores
+.idea/
+*.iml
+*.iws
+.idea_modules/
+out/
+
+# Temporary files
+*.tmp
+*~
+.DS_Store
+.directory
+.Trash-*
+Thumbs.db
