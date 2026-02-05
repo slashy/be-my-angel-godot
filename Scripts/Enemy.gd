@@ -1,4 +1,5 @@
 extends Node2D
+## Enemy that telegraphs an attack and dashes across the arena.
 
 @export var spawn_time: float = 0.4
 @export var aim_time: float = 1.8
@@ -12,7 +13,7 @@ extends Node2D
 @export var tether_pulse_speed: float = 3.0
 @export var tether_glow_intensity: float = 1.5
 
-const DIRECTIONS := {
+const DIRECTIONS: Dictionary = {
 	Vector2(0, -1): "up",
 	Vector2(0, 1): "down",
 	Vector2(-1, 0): "left",
@@ -24,11 +25,11 @@ const DIRECTIONS := {
 	Vector2.ZERO: "down"
 }
 
-var seconds_till_attack := 2
-var target_direction := "down"
-var move_to_target := false
-var attack_indicator_end := Vector2.ZERO
-var arena_radius := 0.0
+var seconds_till_attack: int = 2
+var target_direction: String = "down"
+var move_to_target: bool = false
+var attack_indicator_end: Vector2 = Vector2.ZERO
+var arena_radius: float = 0.0
 var tether_time: float = 0.0
 
 @onready var direction_indicator: Line2D = $DirectionIndicator
@@ -37,7 +38,7 @@ var tether_time: float = 0.0
 @onready var attack_shape: CollisionShape2D = $AttackArea/CollisionShape2D
 @onready var attack_sound: AudioStreamPlayer2D = $AttackSound
 
-# Called when the node enters the scene tree for the first time.
+## Initialize enemy visuals and telegraph attack direction.
 func _ready() -> void:
 	# Scale enemy to be proportional to viewport, but smaller than before
 	var viewport_size = get_viewport().get_visible_rect().size
@@ -49,20 +50,29 @@ func _ready() -> void:
 	scale = Vector2(scale_factor * 0.6, scale_factor * 0.6)
 	
 	var target: Vector2 = Vector2.ZERO
-	var players: Array = get_tree().get_nodes_in_group("player")
+	var players: Array[Node] = get_tree().get_nodes_in_group("player")
 	arena_radius = get_parent().arena_radius
 	
 	if players.size() > 0:
-		var player = players[0]
+		var player := players[0] as Node2D
+		if player == null:
+			queue_free()
+			return
 		target = player.global_position - global_position
+	else:
+		queue_free()
+		return
+
+	if target == Vector2.ZERO:
+		target = Vector2.DOWN
 
 	$AnimatedSprite2D.play("idle_" + DIRECTIONS[_get_target_direction_vector(target)])
 	attack_area.connect("body_entered", Callable(self, "_on_attack_area_body_entered"))
 
-	var direction = target.normalized()
+	var direction: Vector2 = target.normalized()
 
-	var indicator_start = direction * indicator_offset
-	var direction_indicator_end = direction * (indicator_offset + direction_indicator_length)
+	var indicator_start: Vector2 = direction * indicator_offset
+	var direction_indicator_end: Vector2 = direction * (indicator_offset + direction_indicator_length)
 	attack_indicator_end = get_attack_target(indicator_start, direction)
 	
 	$DirectionIndicator.clear_points()
@@ -70,7 +80,8 @@ func _ready() -> void:
 	$DirectionIndicator.add_point(direction_indicator_end)
 	
 	$DirectionIndicator.width = 2.0
-	$DirectionIndicator.default_color = Color(0.2, 1.0, 0.3, 1.0)  # Bright green like in the image
+	# Bright green indicator color.
+	$DirectionIndicator.default_color = Color(0.2, 1.0, 0.3, 1.0)
 	
 	$DirectionIndicator.antialiased = true
 	$DirectionIndicator.joint_mode = Line2D.LINE_JOINT_ROUND
@@ -82,7 +93,7 @@ func _ready() -> void:
 	$AttackIndicator.add_point(to_local(attack_indicator_end))
 	$AttackIndicator.width = attack_width
 
-	if target:
+	if target != Vector2.ZERO:
 		await get_tree().create_timer(spawn_time).timeout
 		$DirectionIndicator.visible = true
 		await get_tree().create_timer(aim_time).timeout
@@ -97,7 +108,6 @@ func _ready() -> void:
 		move_to_target = true
 		
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if $DirectionIndicator.visible:
 		tether_time += delta * tether_pulse_speed
@@ -112,8 +122,8 @@ func _process(delta: float) -> void:
 	if move_to_target:
 		$AnimatedSprite2D.play("idle_" + 
 			DIRECTIONS[_get_target_direction_vector(to_local(attack_indicator_end))])
-		var direction = (attack_indicator_end - global_position).normalized()
-		var step = move_speed * delta		
+		var direction: Vector2 = (attack_indicator_end - global_position).normalized()
+		var step: float = move_speed * delta
 		if global_position.distance_to(attack_indicator_end) > step:
 			global_position += direction * step
 		else:
@@ -122,7 +132,8 @@ func _process(delta: float) -> void:
 			queue_free()
 
 
-func _get_target_direction_vector(target) -> Vector2:
+## Map a direction vector to the nearest 8-way direction.
+func _get_target_direction_vector(target: Vector2) -> Vector2:
 	var directions = [
 		Vector2.RIGHT,
 		Vector2(1, 1),
@@ -138,16 +149,19 @@ func _get_target_direction_vector(target) -> Vector2:
 	if target == Vector2.ZERO:
 		return target 
 		
-	var angle = target.angle()
+	var angle: float = target.angle()
 	var direction = (int(round(angle / (TAU / num_directions))) + num_directions) % num_directions
 		
 	return directions[direction]
 
 
+## Return the circle intersection point for the attack line.
 func get_attack_target(start: Vector2, direction: Vector2) -> Vector2:
-	# ATTACK INDICATOR: Schnittpunkt Linie mit gegenüberliegenden Kreisrand!
-	var attack_start = global_position + start # absoluter Startpunkt
-	# Vektor von Kreis-Mittelpunkt zum Start
+	# Attack indicator: line intersection with the opposite circle edge.
+	var attack_start = global_position + start # absolute start point
+	if direction == Vector2.ZERO:
+		return attack_start
+	# Vector from circle center to start.
 	var rel = attack_start - get_viewport_rect().size / 2
 	var a = direction.length_squared()
 	var b = 2.0 * rel.dot(direction)
@@ -157,18 +171,19 @@ func get_attack_target(start: Vector2, direction: Vector2) -> Vector2:
 	if discr >= 0.0:
 		var t1 = (-b + sqrt(discr)) / (2.0 * a)
 		var t2 = (-b - sqrt(discr)) / (2.0 * a)
-		# Nimm das t, das weiter von attack_start entfernt ist (größerer Betrag)
+		# Choose the t that is farther from the start point.
 		var t = t1 if abs(t1) > abs(t2) else t2
-		# Endpunkt als absolut im Raum berechnen
+		# Compute end point in global space.
 		var attack_end_global = attack_start + direction * t
-		# Line2D arbeitet in lokalen Koordinaten, deshalb Endpunkt in lokalen Bezug
+		# Line2D uses local coords, so return global and convert outside.
 		return attack_end_global
 	
-	# fallback: lang machen
+	# Fallback: extend far beyond the arena.
 	return attack_start + direction * (arena_radius * 2)
 
-func _on_attack_area_body_entered(body):
-	# body ist das eingefallene Objekt – z.B. dein Spieler
+## Handle collisions with the attack area.
+func _on_attack_area_body_entered(body: Node) -> void:
+	# Body is the colliding object (e.g. the player).
 	if move_to_target and body.is_in_group("player"):
 		print("Player hit!")
 		body.apply_knockback(attack_indicator_end, knockback_strength, knockback_timer)
