@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://qfhcdvwxrfbo"]
+[gd_scene format=3 uid="uid://qfhcdvwxrfbo"]
 
 [ext_resource type="Script" uid="uid://dyi4fd1fxjg6f" path="res://Scripts/Gameover.gd" id="1_y7nek"]
 
-[node name="Gameover" type="Control"]
+[node name="Gameover" type="Control" unique_id=277563005]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -13,7 +13,7 @@ grow_vertical = 2
 focus_mode = 2
 script = ExtResource("1_y7nek")
 
-[node name="Screen" type="VBoxContainer" parent="."]
+[node name="Screen" type="VBoxContainer" parent="." unique_id=475079079]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,7 +27,7 @@ offset_bottom = 114.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Screen"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Screen" unique_id=1931586043]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
@@ -36,14 +36,14 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Score" type="Label" parent="Screen"]
+[node name="Score" type="Label" parent="Screen" unique_id=1045019083]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "123"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Highscore" type="RichTextLabel" parent="Screen"]
+[node name="Highscore" type="RichTextLabel" parent="Screen" unique_id=908543772]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
@@ -54,18 +54,18 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonContainer" type="HBoxContainer" parent="Screen"]
+[node name="ButtonContainer" type="HBoxContainer" parent="Screen" unique_id=1947168486]
 layout_mode = 2
 alignment = 1
 
-[node name="Restart" type="Button" parent="Screen/ButtonContainer"]
+[node name="Restart" type="Button" parent="Screen/ButtonContainer" unique_id=1861765832]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 focus_neighbor_right = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Quit")
 text = "Restart"
 
-[node name="Quit" type="Button" parent="Screen/ButtonContainer"]
+[node name="Quit" type="Button" parent="Screen/ButtonContainer" unique_id=1596730426]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 focus_neighbor_left = NodePath("../Restart")
