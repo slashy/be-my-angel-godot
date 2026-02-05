@@ -1,4 +1,5 @@
 extends Node
+## Controls enemy spawning, scoring, and game state transitions.
 
 @export var arena_radius: float = 290.0
 @export var enemy_scene: PackedScene
@@ -13,22 +14,23 @@ extends Node
 
 var elapsed_time: float = 0.0
 var spawn_timer: float = 0.0
-var spawn_interval: float
-var game_over_shown = false
-var game_started = false
+var spawn_interval: float = 0.0
+var game_over_shown: bool = false
+var game_started: bool = false
 
-var taken_angles: Array = []
+var taken_angles: Array[float] = []
 
-@onready var player = get_node_or_null("../Player")
-@onready var angel_container = get_node_or_null("../AngelContainer")
-@onready var hud = get_node_or_null("../HUD")
-@onready var startscreen = get_node_or_null("../HUD/Startscreen")
-@onready var gameover = get_node_or_null("../Gameover/Gameover")
+@onready var player: CharacterBody2D = get_node_or_null("../Player")
+@onready var angel_container: Node = get_node_or_null("../AngelContainer")
+@onready var hud: CanvasLayer = get_node_or_null("../HUD")
+@onready var startscreen: CanvasItem = get_node_or_null("../HUD/Startscreen")
+@onready var gameover: Control = get_node_or_null("../Gameover/Gameover")
 @onready var bgm: AudioStreamPlayer2D = get_node_or_null("../BGM")
 @onready var arena: Sprite2D = get_node_or_null("../Background")
 
 var arena_global_center: Vector2 = Vector2.ZERO
 
+## Initialize timers, audio, and arena bounds.
 func _ready() -> void:
 	randomize()
 	if bgm:
@@ -53,8 +55,10 @@ func _ready() -> void:
 		hud.call_deferred("update_highscore", load_highscore())
 		hud.call_deferred("start_timer")
 	else:
-		push_warning("GameManager: HUD node not found at expected path '../HUD'. " +
-				"Bitte Pfad prüfen.")
+		push_warning(
+			"GameManager: HUD node not found at expected path '../HUD'. " +
+			"Check the path."
+		)
 
 func _process(delta: float) -> void:
 	if not game_started:
@@ -73,26 +77,29 @@ func _process(delta: float) -> void:
 		spawn_timer = spawn_interval
 		_spawn_enemys_based_on_time()
 
+## Spawn a variable number of enemies based on elapsed time.
 func _spawn_enemys_based_on_time() -> void:
 	var t = int(elapsed_time / 10)
 	var count = clamp(1 + t, 1, max_enemys_per_spawn)
 	_spawn_enemys(count)
 
+## Spawn enemies at evenly distributed angles.
 func _spawn_enemys(count: int) -> void:
 	if not enemy_scene:
 		push_error("Enemy scene not assigned in GameManager")
 		return
-	var new_angles = _choose_spawn_angles(count)
+	var new_angles: Array[float] = _choose_spawn_angles(count)
 	for angle in new_angles:
 		_spawn_enemy_at_angle(angle)
 
+## Spawn a single enemy at a given polar angle.
 func _spawn_enemy_at_angle(angle: float) -> void:
 	var spawn_r = arena_radius
 	
 	var dir = Vector2(cos(angle), sin(angle)).normalized()
 	var world_pos = arena_global_center + dir * spawn_r
 
-	var enemy = enemy_scene.instantiate()	
+	var enemy = enemy_scene.instantiate()
 	enemy.global_position = world_pos
 
 	if angel_container:
@@ -119,12 +126,14 @@ func _on_enemy_removed(angle: float) -> void:
 			taken_angles.remove_at(i)
 			return
 
-func _choose_spawn_angles(count: int) -> Array:
-	var chosen: Array = []
+## Pick spawn angles while keeping a minimum separation.
+func _choose_spawn_angles(count: int) -> Array[float]:
+	var chosen: Array[float] = []
 	var min_sep_rad = deg_to_rad(min_separation_degrees)
 	for n in range(count):
-		var best_angle = null
-		var best_score := -1.0
+		var best_angle: float = 0.0
+		var best_score: float = -1.0
+		var has_best: bool = false
 		for attempt in range(max_angle_attempts):
 			var cand = randf() * TAU
 			var min_dist = INF
@@ -135,11 +144,12 @@ func _choose_spawn_angles(count: int) -> Array:
 			if min_dist >= min_sep_rad:
 				best_angle = cand
 				best_score = min_dist
+				has_best = true
 				break
 			if min_dist > best_score:
 				best_score = min_dist
 				best_angle = cand
-		if best_angle == null:
+		if not has_best:
 			if chosen.size() == 0:
 				return []
 			best_angle = wrapf(chosen[chosen.size() - 1] + min_sep_rad, 0.0, TAU)
@@ -150,6 +160,7 @@ func _angle_distance(a: float, b: float) -> float:
 	var diff = wrapf(a - b, -PI, PI)
 	return abs(diff)
 
+## Persist the best survival time to user storage.
 func save_highscore(time_value: float) -> void:
 	var cfg = ConfigFile.new()
 	var err = cfg.load("user://highscores.cfg")
@@ -163,6 +174,7 @@ func save_highscore(time_value: float) -> void:
 		cfg.set_value("scores", "best", time_value)
 	cfg.save("user://highscores.cfg")
 
+## Load the best survival time from user storage.
 func load_highscore() -> float:
 	var cfg = ConfigFile.new()
 	if cfg.load("user://highscores.cfg") == OK:
@@ -170,12 +182,14 @@ func load_highscore() -> float:
 			return float(cfg.get_value("scores", "best"))
 	return 0.0
 
+## Enable gameplay and hide the start screen.
 func start_game() -> void:
 	self.game_started = true
 	if startscreen:
-			startscreen.visible = false
+		startscreen.visible = false
 		
 
+## Handle end-of-run UI and highscore persistence.
 func on_player_death() -> void:
 	if game_over_shown:
 		return
