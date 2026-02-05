@@ -21,7 +21,6 @@ func _ready():
 
 func _draw() -> void:
 	draw_circle(gm.arena_global_center, gm.arena_radius, Color.RED, false, 5.0)
-	pass
 
 func scale_player_for_viewport():
 	var viewport_size = get_viewport_rect().size
