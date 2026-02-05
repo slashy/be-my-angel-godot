@@ -71,10 +71,10 @@ func _ready() -> void:
 
 	var direction: Vector2 = target.normalized()
 
-	var indicator_start: Vector2: Vector2 = direction * indicator_offset
-	var direction_indicator_end: Vector2: Vector2 = (
-		direction * (indicator_offset + direction_indicator_length)
-	)
+	var indicator_start: Vector2 = direction * indicator_offset
+	var direction_indicator_end: Vector2 = direction * (
+				indicator_offset + direction_indicator_length
+			)
 	attack_indicator_end = get_attack_target(indicator_start, direction)
 	
 	$DirectionIndicator.clear_points()
