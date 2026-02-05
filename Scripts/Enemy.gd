@@ -146,8 +146,9 @@ func _get_target_direction_vector(target) -> Vector2:
 
 func get_attack_target(start: Vector2, direction: Vector2) -> Vector2:
 	# ATTACK INDICATOR: Schnittpunkt Linie mit gegenüberliegenden Kreisrand!
-	var attack_start = global_position + start        # absoluter Startpunkt
-	var rel = attack_start - get_viewport_rect().size / 2                      # Vektor von Kreis-Mittelpunkt zum Start
+	var attack_start = global_position + start # absoluter Startpunkt
+	# Vektor von Kreis-Mittelpunkt zum Start
+	var rel = attack_start - get_viewport_rect().size / 2
 	var a = direction.length_squared()
 	var b = 2.0 * rel.dot(direction)
 	var c = rel.length_squared() - arena_radius * arena_radius
@@ -162,9 +163,9 @@ func get_attack_target(start: Vector2, direction: Vector2) -> Vector2:
 		var attack_end_global = attack_start + direction * t
 		# Line2D arbeitet in lokalen Koordinaten, deshalb Endpunkt in lokalen Bezug
 		return attack_end_global
-	else:
-		# fallback: lang machen
-		return attack_start + direction * (arena_radius * 2)
+	
+	# fallback: lang machen
+	return attack_start + direction * (arena_radius * 2)
 
 func _on_attack_area_body_entered(body):
 	# body ist das eingefallene Objekt – z.B. dein Spieler

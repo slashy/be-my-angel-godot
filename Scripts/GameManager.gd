@@ -53,7 +53,8 @@ func _ready() -> void:
 		hud.call_deferred("update_highscore", load_highscore())
 		hud.call_deferred("start_timer")
 	else:
-		push_warning("GameManager: HUD node not found at expected path '../HUD'. Bitte Pfad prüfen.")
+		push_warning("GameManager: HUD node not found at expected path '../HUD'. " +
+				"Bitte Pfad prüfen.")
 
 func _process(delta: float) -> void:
 	if not game_started:
@@ -65,7 +66,8 @@ func _process(delta: float) -> void:
 	elapsed_time += delta
 	if hud:
 		hud.set_time(elapsed_time)
-	spawn_interval = max(min_spawn_interval, initial_spawn_interval - spawn_acceleration * elapsed_time)
+	var interval_change = spawn_acceleration * elapsed_time
+	spawn_interval = max(min_spawn_interval, initial_spawn_interval - interval_change)
 	spawn_timer -= delta
 	if spawn_timer <= 0.0:
 		spawn_timer = spawn_interval
@@ -140,8 +142,7 @@ func _choose_spawn_angles(count: int) -> Array:
 		if best_angle == null:
 			if chosen.size() == 0:
 				return []
-			else:
-				best_angle = wrapf(chosen[chosen.size() - 1] + min_sep_rad, 0.0, TAU)
+			best_angle = wrapf(chosen[chosen.size() - 1] + min_sep_rad, 0.0, TAU)
 		chosen.append(best_angle)
 	return chosen
 
