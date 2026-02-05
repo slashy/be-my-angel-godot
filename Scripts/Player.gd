@@ -1,6 +1,7 @@
 extends CharacterBody2D
+## Player controller for movement, animations, and knockback.
 
-const DIRECTIONS = {
+const DIRECTIONS: Dictionary = {
 	Vector2(0, -1): "up",
 	Vector2(0, 1): "down",
 	Vector2(-1, 0): "left",
@@ -23,11 +24,12 @@ var input_velocity: Vector2 = Vector2.ZERO
 @onready var gm: Node = get_node("../GameManager")
 
 
+## Center the player at the arena origin.
 func _ready() -> void:
 	var arena_center = get_viewport_rect().size / 2
 	position = arena_center
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	if self.is_dead:
@@ -55,7 +57,8 @@ func _process(delta: float) -> void:
 
 	move_and_slide()
 	
-func apply_knockback(target_position: Vector2, strength: float, duration: float):
+## Apply temporary knockback velocity away from a target position.
+func apply_knockback(target_position: Vector2, strength: float, duration: float) -> void:
 	if knockback_timer > 0.0:
 		return
 	var dir = (target_position - global_position).normalized()
@@ -68,9 +71,11 @@ func apply_knockback(target_position: Vector2, strength: float, duration: float)
 func map_to_diagonal_dir(vec: Vector2) -> Vector2:
 	return Vector2(sign(vec.x), sign(vec.y))
 	
+## Check whether the player has left the arena radius.
 func is_outside_arena() -> bool:
-	var game_manager = get_parent().get_node("GameManager")
-	var arena_radius = game_manager.arena_radius
+	if gm == null:
+		return false
+	var arena_radius = gm.arena_radius
 	var arena_center = get_viewport_rect().size / 2
 	var distance = global_position.distance_to(arena_center)
 	return distance > arena_radius
