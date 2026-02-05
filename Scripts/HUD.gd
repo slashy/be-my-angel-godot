@@ -11,9 +11,11 @@ func _ready() -> void:
 	transform = Transform2D.IDENTITY
 	
 	if time_label == null:
-		push_warning("HUD: TimeLabel not found at 'VBoxContainer/TimeLabel'. Bitte prüfen: Node existiert und heißt genau so.")
+		push_warning("HUD: TimeLabel not found at 'VBoxContainer/TimeLabel'. " +
+					"Bitte prüfen: Node existiert und heißt genau so.")
 	if best_label == null:
-		push_warning("HUD: BestLabel not found at 'VBoxContainer/BestLabel'. Bitte prüfen: Node existiert und heißt genau so.")
+		push_warning("HUD: BestLabel not found at 'VBoxContainer/BestLabel'. " +
+					"Bitte prüfen: Node existiert und heißt genau so.")
 
 func start_timer() -> void:
 	timer_playing = true
